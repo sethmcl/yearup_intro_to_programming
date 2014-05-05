@@ -1,0 +1,32 @@
+{
+  "name": "yearup_intro_to_programming",
+  "version": "0.0.0",
+  "description": "yearup_js101 ============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sethmcl/yearup_intro_to_programming.git"
+  },
+  "author": "Seth McLaughlin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sethmcl/yearup_intro_to_programming/issues"
+  },
+  "homepage": "https://github.com/sethmcl/yearup_intro_to_programming",
+  "dependencies": {
+    "broccoli": "^0.11.0",
+    "clone": "^0.1.15",
+    "debug": "^0.8.1",
+    "gulp": "^3.6.2",
+    "mkdirp": "^0.4.1",
+    "mustache": "^0.8.1",
+    "ncp": "^0.5.1",
+    "q": "^1.0.1",
+    "rimraf": "^2.2.6",
+    "underscore": "^1.6.0",
+    "watch": "^0.10.0"
+  }
+}

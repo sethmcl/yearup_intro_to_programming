@@ -1,0 +1,45 @@
+#editor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#toc {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #666;
+  font-family: 'Helvetica', 'sans-serif';
+  margin: 0;
+  color: #fff;
+  padding: 30px 50px;
+}
+
+#toc .selected {
+  font-weight: bold;
+  color: yellow;
+}
+
+#toc a {
+  text-decoration: none;
+  color: #fff;
+}
+
+#toc.hidden {
+  display: none;
+}
+
+li.parent {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+li.child {
+  list-style-type: none;
+
+}
