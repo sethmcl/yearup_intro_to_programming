@@ -59,6 +59,10 @@ function fnBody(fn) {
     return line.slice(indent);
   });
 
+  code.unshift('');
+  code.unshift('/* Press CMD+. (mac) or CTRL+. (pc) to jump to a different example */');
+  code.unshift('/* Press CMD+ENTER (mac) or CTRL+ENTER (pc) to execute the code');
+
   return code.join('\n');
 }
 
