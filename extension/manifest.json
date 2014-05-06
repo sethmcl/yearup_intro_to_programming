@@ -1,6 +1,13 @@
 {
-  "name": "YearUp",
+  "name": "YearUp: Intro to Programming",
   "version": "0.0.1",
+  "description": "Examples and exercises for the YearUp class Introduction to Programming.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "author": "Seth McLaughlin",
   "minimum_chrome_version": "34.0",
   "devtools_page": "devtools.html",
   "manifest_version": 2
