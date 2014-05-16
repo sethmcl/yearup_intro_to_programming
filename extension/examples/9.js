@@ -7,9 +7,8 @@ module.exports = {
       return '--' + name + '--';
     });
 
-    deepEqual(list, ['bob', 'mary', 'zed']);
-    deepEqual(newNames, ['--bob--', '--mary--', '--zed--']);
-
+    console.log(list);
+    console.log(newNames);
   },
 
   puzzles:[

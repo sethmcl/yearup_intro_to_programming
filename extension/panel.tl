@@ -6,19 +6,17 @@
   <link rel="stylesheet" href="../panel.css" type="text/css">
 </head>
 <body>
-  <div id="editor">{{data.code}}</div>
+  <script id="default-code" type="code/template">{{{data.code}}}</script>
+  <button id="reset">reset</button>
+  <div id="editor"></div>
   {{calc}}
   <ol id="toc" class="hidden">
     {{#examples}}
       <li class="parent">
         <a href="{{filename}}"{{#selected}} class="selected"{{/selected}}>{{label}}</a>
-        <ul>
-          {{#children}}
-            <li class="child">
-              <a href="{{filename}}" class="{{#childSelected}}selected {{/childSelected}}puzzle">{{label}}</a>
-            </li>
-          {{/children}}
-        </ul>
+        {{#children}}
+         <a href="{{filename}}" class="{{#childSelected}}selected {{/childSelected}}puzzle">{{label}}</a>
+        {{/children}}
       </li>
     {{/examples}}
   </ol>

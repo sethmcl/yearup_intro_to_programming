@@ -1,10 +1,19 @@
 (function () {
   var editor = ace.edit('editor');
+  editor.on('change', onDocumentChange);
   editor.getSession().setMode('ace/mode/javascript');
   editor.getSession().setTabSize(2);
 
+
+  load();
+
   try {
     chrome.devtools.inspectedWindow.eval('window.location.reload()');
+
+    setTimeout(function () {
+      chrome.devtools.inspectedWindow.eval(__log.toString());
+      chrome.devtools.inspectedWindow.eval(__lineNumber.toString());
+    }, 1000);
   } catch (e) {
     console.error(e.stack);
   }
@@ -23,11 +32,35 @@
     }
   });
 
+  $('#reset').click(reset);
+
+  function reset() {
+    delete localStorage[window.location.href];
+    load();
+  }
+
+  function onDocumentChange(e) {
+    localStorage[window.location.href] = editor.getSession().getValue();
+  }
+
+  function load() {
+    var saved = localStorage[window.location.href];
+    var code;
+
+    if (saved) {
+      code = saved;
+    } else {
+      code = document.querySelector('#default-code').innerHTML;
+    }
+
+    editor.getSession().setValue(code);
+  }
+
   function run() {
     var code = [
         'clear();',
         'try {\n',
-        editor.getValue(),
+        getCode(),
         '} catch(e) { console.error(e.message); };',
         equal.toString(),
         ';',
@@ -35,6 +68,22 @@
     ].join('');
 
     chrome.devtools.inspectedWindow.eval(code);
+  }
+
+  function __lineNumber() {
+    var line = new Error().stack.split('\n')[3].match(/([0-9]+):[0-9]+/)[1] - 2;
+
+    var spaces = new Array(4 - Math.min(3, line.toString().length)).join(' ');
+
+    return '(line ' + line + ')' + spaces;
+  }
+
+  function getCode() {
+    var code = editor.getValue();
+
+    return code.replace(/console.log\((.*)\)/g, function (match, a) {
+      return '__log(' + a + ')';
+    });
   }
 
   function toggleToc() {
@@ -46,14 +95,30 @@
   }
 })();
 
+function __log() {
+  var args = Array.prototype.slice.call(arguments, 0);
+  var line = new Error().stack.split('\n')[2].match(/([0-9]+):[0-9]+/)[1] - 2;
+
+  if (typeof args[0] !== 'undefined') {
+    args[0] = '%c' + __lineNumber() + '%c' + args[0];
+    args.push('color:blue');
+    args.push('color:#000');
+  } else {
+    args.push('%c' + __lineNumber());
+    args.push('color:blue');
+  }
+
+  console.log.apply(console, args);
+}
+
 function equal(actual, expected) {
   var result = (actual === expected);
   var line = new Error().stack.split('\n')[2].match(/([0-9]+):[0-9]+/)[1] - 2;
 
   if (!result) {
-    console.error('(line ' + line + ') Expected', actual, '===', expected);
+    console.log('%c' + __lineNumber() + '%s !== %s', 'color:red', actual, expected);
   } else {
-    console.log('%c(line %s) %s === %s', 'color:green', line, actual, expected);
+    console.log('%c' + __lineNumber() + '%s === %s', 'color:green', actual, expected);
   }
 }
 
@@ -64,9 +129,9 @@ function deepEqual(actual, expected) {
   var expectedJSON = JSON.stringify(expected);
 
   if (!result) {
-    console.error('(line ' + line + ') Expected', actualJSON, 'to equal', expectedJSON);
+    console.log('%c' + __lineNumber() + '%s does not equal %s', 'color: red', actualJSON, expectedJSON);
   } else {
-    console.log('%c(line %s) %s equals %s', 'color:green', line, actualJSON, expectedJSON);
+    console.log('%c' + __lineNumber() + '%s equals %s', 'color:green', actualJSON, expectedJSON);
   }
 
   function deepCompare () {

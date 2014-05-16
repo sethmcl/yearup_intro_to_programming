@@ -19,8 +19,8 @@ module.exports = {
       var listB = [3, 8, 2, 2];
       var listC = [3, 8, 2, 2];
 
-      console.log('listA is equal to listB: %s', isEqual(listA, listB));
-      console.log('listB is equal to listC: %s', isEqual(listB, listC));
+      console.log('listA is equal to listB: ' + isEqual(listA, listB));
+      console.log('listB is equal to listC: ' + isEqual(listB, listC));
     }
   ]
 };

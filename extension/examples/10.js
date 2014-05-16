@@ -3,12 +3,12 @@ module.exports = {
   example: function () {
     var list = ['zed', 'bob', 'mary'];
 
-    var newNames = list.map(function (name) {
+    var newNames = list.filter(function (name) {
       return name.length > 3;
     });
 
-    deepEqual(list, ['bob', 'mary', 'zed']);
-    deepEqual(newNames, ['mary']);
+    console.log(list);
+    console.log(newNames);
 
   },
 

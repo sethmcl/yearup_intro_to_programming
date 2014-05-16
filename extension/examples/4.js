@@ -5,8 +5,7 @@ module.exports = {
     var list = ['blue', 'green', 'red', 'purple', 'pink'];
 
     // Getting the length of the array
-    var count = list.length;
-    equal(count, 5);
+    console.log(list.length);
 
   },
 

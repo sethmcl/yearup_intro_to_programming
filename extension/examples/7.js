@@ -1,28 +1,30 @@
 module.exports = {
   title: 'Array helpers',
   example: function () {
-    var list = ['zed', 'bob', 'mary'];
+    var list, length, string, input, split;
+
+    list = ['zed', 'bob', 'mary'];
 
     // Get number of items in the array
-    var length = list.length;
-    equal(length, 3);
+    length = list.length;
+    console.log(length);
 
     // Reverse the array
     list.reverse();
-    deepEqual(list, ['mary', 'bob', 'zed']);
+    console.log(list);
 
     // Sort the array
     list.sort();
-    deepEqual(list, ['bob', 'mary', 'zed']);
+    console.log(list);
 
     // Concatenate items in array
-    var string = list.join(',');
-    equal(string, 'bob, mary, zed');
+    string = list.join(',');
+    console.log(string);
 
     // Turn string in to array
-    var input = 'A:B:C:D:E';
-    var split = input.split(':');
-    deepEqual(split, ['A', 'B', 'C', 'D', 'E']);
+    input = 'A:B:C:D:E';
+    split = input.split(':');
+    console.log(split);
 
   },
 

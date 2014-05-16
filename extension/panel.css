@@ -18,11 +18,11 @@
   margin: 0;
   color: #fff;
   padding: 30px 50px;
-  -webkit-column-count: 4;
+  -webkit-column-count: 2;
   overflow: scroll;
 }
 
-#toc .selected {
+#toc .selected, #toc a.puzzle.selected {
   font-weight: bold;
   color: yellow;
 }
@@ -30,6 +30,18 @@
 #toc a {
   text-decoration: none;
   color: #fff;
+}
+
+#toc a.puzzle {
+  color: #AAA;
+}
+
+#toc a.puzzle:after {
+  content: ', ';
+}
+
+#toc a.puzzle:last-child:after {
+  content: '';
 }
 
 #toc.hidden {
@@ -43,5 +55,11 @@ li.parent {
 
 li.child {
   list-style-type: none;
+}
 
+#reset {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1000;
 }
